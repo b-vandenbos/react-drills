@@ -1,20 +1,39 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
 class App extends Component {
+ constructor() {
+   super();
+
+   this.state = {
+     array: ['one', 'two', 'three', 'four', 'five'],
+     userInput: ''
+   };
+ }
+
+ trackChange(val) {
+   this.setState({userInput: val});
+ }
+
+ makeList() {
+
+ }
+
   render() {
+    let filteredList = this.state.array.filter(str => str.includes(this.state.userInput))
+    let bulletList = filteredList.map((element, index) => {
+      return <p key={index}>{element}</p>;
+    })
+
+
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className='App'>
+      <input onChange={(e) => this.trackChange(e.target.value)}/>
+      <h1>{bulletList}</h1>
       </div>
-    );
+
+
+    )
   }
 }
 
